@@ -1,19 +1,24 @@
-name: Test Pipeline
+name: Verification avant Merge
 
 on:
-  push:
+  pull_request:
     branches: [ "main", "master" ]
 
 jobs:
-  verification:
+  tests-automatiques:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Récupérer les fichiers du dépôt
+      - name: 1. Récupérer le code
         uses: actions/checkout@v4
 
-      - name: Lister le contenu du dépôt
-        run: ls -la
+      # --- EXEMPLE POUR NODE.JS / REACT ---
+      - name: 2. Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Confirmer l'exécution
-        run: echo "Pipeline exécuté avec succès !"
+      - name: 3. Installer les dépendances et tester
+        run: |
+          npm install
+          npm test
