@@ -1,0 +1,19 @@
+name: Test Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  verification:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer les fichiers du dépôt
+        uses: actions/checkout@v4
+
+      - name: Lister le contenu du dépôt
+        run: ls -la
+
+      - name: Confirmer l'exécution
+        run: echo "Pipeline exécuté avec succès !"
